@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Surrey{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="/static/main.css" />
+
+    <section class="city-dashboard surrey-dashboard">
+        <h1>Surrey</h1>
+    </section>
+    
+    <!-- Filter Buttons -->
+    <div class="filter d-flex justify-content-between">
+        <div>
+            <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/location/surrey?filter_type=Cafe'">Cafe</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/location/surrey?filter_type=School'">School</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/location/surrey?filter_type=Library'">Library</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/location/surrey?filter_type=Other'">Other</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/location/surrey'">All</button>
+        </div>
+        <form method="GET" action="{{ url_for('surrey') }}" class="form-inline search-form">
+            <button class="btn search-btn my-2 my-sm-0" type="submit">Filter</button>
+            <input class="search-input shadow" type="search" placeholder="Search" aria-label="Search" name="search_query" value="{{ search_query or '' }}">
+        </form>
+    </div>
+    <div class="box-table shadow">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-title">
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Hours</th>
+                    <th>Link</th>
+                    <th>Phone</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                {% if location.city == "Surrey" %}
+                <tr class="table-row">
+                    <td>{{ location.name }}</td>
+                    <td>{{ location.address }}</td>
+                    <td>{{ location.hours }}</td>
+                    <td class="link-width"><a href="{{ location.link }}" target="_blank">{{ location.link }}</a></td>
+                    <td class="phone-width">{{ location.phone }}</td>
+                    <td class="{{ location.location_type|lower }}">{{ location.location_type }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

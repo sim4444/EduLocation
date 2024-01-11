@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}User Data{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="/static/main.css" />
+
+    <section class="dashboard shadow">
+        <h1>Requested Locations</h1>
+    </section>
+    <div class="box-table shadow">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-title">
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Hours</th>
+                    <th>Link</th>
+                    <th>Phone</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr class="table-row">
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.city }}</td>
+                    <td>{{ request.address }}</td>
+                    <td>{{ request.hours }}</td>
+                    <td><a href="{{ request.link }}" target="_blank">{{ request.link }}</a></td>
+                    <td>{{ request.phone }}</td>
+                    <td class="{{ request.location_type|lower }}">{{ request.location_type }}</td>
+                    <td class="action-width">
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/user_data/add/{{ request.id }}'">Add</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='/user_data/delete/{{ request.id }}'">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

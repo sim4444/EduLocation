@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <section class="header index-header">
+      <div class="text-box">
+        <h1>Find some places to study</h1>
+        <p>EduLocation helps you to find the best places to study in lower mainland based on your personal requirements. 
+          <br>Find your next study date in Vancouver, Burnaby, Surrey, Richmond and Coquitlam.
+          <br>Simply choose a city and view all the available locations, enjoy your seamless experience!
+        </p>
+        <a href="#find-location" class="hero-btn">Find a Location</a>
+      </div>
+    </section>
+    <!-- ---- Locations ---- -->
+
+    <section class="locations" id="find-location">
+      <h1>Select A Location</h1>
+      <div class="row">
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('vancouver') }}">
+          <img src="/static/image/vancouver.jpg">
+          <div class="layer"></div>
+            <h3>Vancouver</h3>
+          </a>
+        </div>
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('burnaby') }}">
+          <img src="/static/image/burnaby.jpg">
+          <div class="layer"></div>
+            <h3>Burnaby</h3>
+          </a>
+        </div>
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('coquitlam') }}">
+          <img src="/static/image/coquitlam.jpg">
+          <div class="layer"></div>
+            <h3>Coquitlam</h3>
+          </a>
+        </div>
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('richmond') }}">
+          <img src="/static/image/richmond.jpg">
+          <div class="layer"></div>
+            <h3>Richmond</h3>
+          </a>
+        </div>
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('surrey') }}">
+          <img src="/static/image/surrey.jpg">
+          <div class="layer"></div>
+            <h3>Surrey</h3>
+          </a>
+        </div>
+
+        <div class="locations-col shadow">
+          <a href="{{ url_for('locations') }}">
+          <img src="/static/image/locations.jpg">
+          <div class="layer"></div>
+            <h3>All Locations</h3>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+    
+{% endblock %}

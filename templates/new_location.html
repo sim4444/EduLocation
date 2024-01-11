@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Add New Location{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="/static/main.css" />
+
+    <section class="dashboard shadow">
+        <h1>Add New Location</h1>
+    </section>
+
+    {% if error %}
+    <p style="color:red">{{error}}</p>
+    {% endif %}
+    <div class="shadow form-box">
+        <form method="POST" action="{{ url_for('new_location') }}">
+            {{ form.csrf_token }}
+            <label for="name">Name</label>
+            <input id="name" name="name" required type="text">
+            <label for="city">City</label>
+            <select name="city">
+                <option value="Vancouver">Vancouver</option>
+                <option value="Burnaby">Burnaby</option>
+                <option value="Coquitlam">Coquitlam</option>
+                <option value="Surrey">Surrey</option>
+                <option value="Richmond">Richmond</option>
+            </select>
+            <br></br>
+            <label for="address">Address</label>
+            <input id="address" name="address" required type="text">
+            <br></br>
+
+            <label>Hours of Operation -</label>
+            <label for="open">Open:</label>
+            <input type="time" name="open" required><br></br>
+            <label for="close" style="margin-left: 167.64px;">Close:</label>
+            <input type="time" name="close" required><br></br>
+            
+            <label for="link">Link to Website</label>
+            <input id="link" name="link" required type="text">
+
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" required 
+            type="text"
+            pattern="\d{10}|\d{3}-\d{3}-\d{4}"
+            oninvalid="setCustomValidity('Please enter the proper format : (XXX-XXX-XXXX)')"
+            oninput="setCustomValidity('')"
+            placeholder="XXX-XXX-XXXX">
+
+            <br> <br>
+            <label for="location_type">Type of Location</label>
+            <select name="location_type">
+            <option value="Cafe">Cafe</option>
+            <option value="School">School</option>
+            <option value="Library">Library</option>
+            <option value="Other">Other</option>
+            </select>
+            <br> <br>
+            {{ form.submit }}
+        </form>
+    </div>
+    <div class="cancel">
+        <a href="{{ url_for('admin') }}"><button class="btn btn-primary" style="background-color:#87708D;">Cancel</button></a>
+    </div>
+{% endblock %}

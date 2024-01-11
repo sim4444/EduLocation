@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Edit Location{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="/static/main.css" />
+    <section class="dashboard">
+        <h1>Currently Editing: {{ location.name }}</h1>
+    </section>
+    {% if error %}
+    <p style="color:red">{{error}}</p>
+    {% endif %}
+    <div class="shadow form-box">
+        <form method="POST" action="{{ url_for('edit_location', location_id=location.id) }}">
+            {{ form.csrf_token }}
+            <label for="name">Name</label>
+            <input id="name" name="name" required type="text" value="{{ location.name }}">
+            <label for="city">City</label>
+            <select name="city">
+                <option value="{{ location.city }}">Current: {{ location.city }}</option>
+                <option value="Vancouver">Vancouver</option>
+                <option value="Burnaby">Burnaby</option>
+                <option value="Coquitlam">Coquitlam</option>
+                <option value="Surrey">Surrey</option>
+                <option value="Richmond">Richmond</option>
+            </select>
+            <br></br>
+            <label for="address">Address</label>
+            <input id="address" name="address" required type="text" value="{{ location.address }}">
+            <br></br>
+
+            <label>Hours of Operation -</label>
+            <label for="open">Open:</label>
+            <input type="time" name="open" required><br></br>
+            <label for="close" style="margin-left: 167.64px;">Close:</label>
+            <input type="time" name="close" required value="{{ location.hours }}"><br></br>
+            
+            <label for="link">Link to Website</label>
+            <input id="link" name="link" required type="text" value="{{ location.link }}">
+
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" required 
+            type="text"
+            pattern="\d{10}|\d{3}-\d{3}-\d{4}"
+            oninvalid="setCustomValidity('Please enter the proper format : (XXX-XXX-XXXX)')"
+            placeholder="XXX-XXX-XXXX" value="{{ location.phone }}">
+
+            <br> <br>
+            <label for="location_type">Type of Location</label>
+            <select name="location_type">
+                <option value="{{ location.location_type }}">Current: {{ location.location_type }} </option>
+                <option value="Cafe">Cafe</option>
+                <option value="School">School</option>
+                <option value="Library">Library</option>
+                <option value="Other">Other</option>
+            </select>
+            <br> <br>
+            {{ form.submit }}
+        </form>
+    </div>
+    <div class="cancel">
+        <a href="{{ url_for('admin') }}"><button class="btn btn-primary" style="background-color:#87708D;">Cancel</button></a>
+        <a href="{{ url_for('delete_location', location_id=location.id) }}"><button class="btn btn-danger delete;">Delete location</button></a>
+    </div>
+{% endblock %}
